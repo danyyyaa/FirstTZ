@@ -1,37 +1,38 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        String content = "";
+
         /*for (int i = 0; i < args.length; i++) {
-            mergeSort(args[i]);
+            content = getString(args[i], content);
         }*/
 
-        String content = "";
-        content = getString("C:\\Users\\hp\\projects\\TZ\\src\\in1.txt", content);
-        content = getString("C:\\Users\\hp\\projects\\TZ\\src\\in2.txt", content);
-        content = getString("C:\\Users\\hp\\projects\\TZ\\src\\in3.txt", content);
+        content = getString("src/in1.txt", content);
+        content = getString("src/in2.txt", content);
+        content = getString("src/in3.txt", content);
+
+
+        System.out.println(content); // вывод неотсортированных данных
 
         String[] lines = content.split(("\\r?\\n"));
-
-        for (String line : lines) {
-            System.out.println(line);
-        }
-
 
         List<Integer> elements = new ArrayList<>();
 
         for (int i = 0; i < lines.length; i++) {
             try {
                 elements.add((Integer.parseInt(lines[i])));
-            } catch (NumberFormatException e) {
-                //System.out.println("fsdg");
-            }
+            } catch (NumberFormatException e) {} // проверка на строку в целочисленных файлах
         }
+
         int[] arrayElements = new int[elements.size()];
 
         for (int i = 0; i < arrayElements.length; i++) {
@@ -39,32 +40,18 @@ public class Main {
         }
 
         arrayElements = mergeSort(arrayElements);
-        System.out.println("-----------------");
 
-        for (int el : arrayElements) {
-            System.out.println(el);
-        }
-
-
-        /*String[] lines = content.split(("\\r?\\n"));
-        int[] elements = new int[lines.length];
-
-
-        for (int i = 0; i < elements.length; i++) {
-            elements[i] = (Integer.parseInt(lines[i]));
-        }
-
-        for (int el : elements) {
-            System.out.println(el);
-        }
-        System.out.println("-----------------");
-
-        elements = mergeSort(elements);
-
-        for (int el : elements) {
+        //System.out.println("-----------------");
+        /*for (int el : arrayElements) { // вывод отсортированных данных
             System.out.println(el);
         }*/
+
+        FileWriter writer = new FileWriter("output.txt");
+        for (int el : arrayElements) {
+            writer.write(el + System.getProperty("line.separator"));
         }
+        writer.close();
+    }
 
 
     public static String getString(String path, String content) {
