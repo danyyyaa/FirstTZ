@@ -61,14 +61,15 @@ public class Main {
             newCounter++;
         }
 
-
         if (integersInAscending) {
             System.out.println("Числа по возрастанию");
-            IntegerSort integerSort = new IntegerSort(parameters, outFileName);
+            IntegerSort integerSort = new IntegerSort(parameters, outFileName, true);
             integerSort.run();
         }
         if (integersInDescending) {
             System.out.println("Числа по убыванию");
+            IntegerSort integerSort = new IntegerSort(parameters, outFileName, false);
+            integerSort.run();
         }
         if (stringInAscending) {
             System.out.println("Строки по возрастанию");

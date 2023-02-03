@@ -13,9 +13,11 @@ public class IntegerSort {
     List<Integer> elements;
     int[] arrayElements;
     String fileName;
+    boolean sortStatus;
 
-    public IntegerSort(String[] args, String fileName) {
+    public IntegerSort(String[] args, String fileName, boolean sortStatus) {
         try {
+            this.sortStatus = sortStatus;
             this.fileName = fileName;
 
             for (int i = 0; i < args.length; i++) {
@@ -63,14 +65,22 @@ public class IntegerSort {
     }
     public void run() throws IOException {
         arrayElements = mergeSort(arrayElements);
-
         FileWriter writer = new FileWriter(fileName);
-        for (int el : arrayElements) {
-            //System.out.println(el); // вывод отсортированного файла
-            writer.write(el + System.getProperty("line.separator"));
+
+        List<Integer> list = new ArrayList<>();
+        if (!sortStatus) {
+            for (int i = arrayElements.length - 1; i > 0; i--) {
+                list.add(arrayElements[i]);
+            }
+            for (int el : list) {
+                writer.write(el + System.getProperty("line.separator"));
+            }
+        } else {
+            for (int el : arrayElements) {
+                writer.write(el + System.getProperty("line.separator"));
+            }
         }
         writer.close();
-
     }
 
     public String getString(String path, String content) {
