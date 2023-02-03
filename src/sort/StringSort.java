@@ -29,7 +29,7 @@ public class StringSort {
         }
     }
 
-    public String getString(String path, String content) {
+    private String getString(String path, String content) {
         FileReader fileReader = new FileReader();
         content += fileReader.readFileContents(path) + "\n";
         return content;

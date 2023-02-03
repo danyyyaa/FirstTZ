@@ -63,12 +63,12 @@ public class IntegerSort {
         writer.close();
     }
 
-    public String getString(String path, String content) {
+    private String getString(String path, String content) {
         FileReader fileReader = new FileReader();
         content += fileReader.readFileContents(path) + "\n";
         return content;
     }
-    public static int[] mergeSort(int[] sortArr) {
+    private static int[] mergeSort(int[] sortArr) {
         int[] buffer1 = Arrays.copyOf(sortArr, sortArr.length);
         int[] buffer2 = new int[sortArr.length];
         int[] result = mergeSortInner(buffer1, buffer2, 0, sortArr.length);
@@ -76,7 +76,7 @@ public class IntegerSort {
         return result;
     }
 
-    public static int[] mergeSortInner(int[] buffer1, int[] buffer2, int startIndex, int endIndex) {
+    private static int[] mergeSortInner(int[] buffer1, int[] buffer2, int startIndex, int endIndex) {
         if (startIndex >= endIndex - 1) {
             return buffer1;
         }
