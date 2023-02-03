@@ -2,12 +2,13 @@ package sort;
 
 import util.FileReader;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StringSort {
+public class StringSort extends FileReader {
     String[] args;
     String content;
     String fileName;
@@ -21,7 +22,7 @@ public class StringSort {
         this.sortStatus = sortStatus;
 
         for (int i = 0; i < args.length; i++) {
-            this.content = getString(args[i], content);
+            this.content = FileReader.getString(args[i], content);
         }
         String[] lines = content.split(("\\r?\\n"));
         for (int i = 0; i < lines.length; i++) {
@@ -29,11 +30,6 @@ public class StringSort {
         }
     }
 
-    private String getString(String path, String content) {
-        FileReader fileReader = new FileReader();
-        content += fileReader.readFileContents(path) + "\n";
-        return content;
-    }
 
     public void run() throws IOException {
         elements.sort(String.CASE_INSENSITIVE_ORDER);

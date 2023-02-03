@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class IntegerSort {
+public class IntegerSort extends FileReader {
     static String content;
     List<Integer> elements;
     int[] arrayElements;
@@ -21,7 +21,7 @@ public class IntegerSort {
             this.fileName = fileName;
 
             for (int i = 0; i < args.length; i++) {
-                this.content = getString(args[i], content);
+                this.content = FileReader.getString(args[i], content);
             }
             String[] lines = content.split(("\\r?\\n"));
 
@@ -32,6 +32,7 @@ public class IntegerSort {
                     this.elements.add((Integer.parseInt(lines[i])));
                 } catch (NumberFormatException e) {} // проверка на строку в целочисленных файлах
             }
+
             arrayElements = new int[elements.size()];
 
             for (int i = 0; i < arrayElements.length; i++) {
@@ -46,6 +47,9 @@ public class IntegerSort {
     public void run() throws IOException {
         arrayElements = mergeSort(arrayElements);
         FileWriter writer = new FileWriter(fileName);
+        /*for (int i : arrayElements) {
+            System.out.println(i);
+        }*/
 
         List<Integer> list = new ArrayList<>();
         if (!sortStatus) {
@@ -54,6 +58,7 @@ public class IntegerSort {
             }
             for (int el : list) {
                 writer.write(el + System.getProperty("line.separator"));
+               // System.out.println(el);
             }
         } else {
             for (int el : arrayElements) {
@@ -63,11 +68,6 @@ public class IntegerSort {
         writer.close();
     }
 
-    private String getString(String path, String content) {
-        FileReader fileReader = new FileReader();
-        content += fileReader.readFileContents(path) + "\n";
-        return content;
-    }
     private static int[] mergeSort(int[] sortArr) {
         int[] buffer1 = Arrays.copyOf(sortArr, sortArr.length);
         int[] buffer2 = new int[sortArr.length];
