@@ -12,9 +12,12 @@ public class IntegerSort {
     static String content;
     List<Integer> elements;
     int[] arrayElements;
+    String fileName;
 
-    public IntegerSort(String[] args) {
+    public IntegerSort(String[] args, String fileName) {
         try {
+            this.fileName = fileName;
+
             for (int i = 0; i < args.length; i++) {
                 this.content = getString(args[i], content);
             }
@@ -61,9 +64,9 @@ public class IntegerSort {
     public void run() throws IOException {
         arrayElements = mergeSort(arrayElements);
 
-        FileWriter writer = new FileWriter("output.txt");
+        FileWriter writer = new FileWriter(fileName);
         for (int el : arrayElements) {
-            System.out.println(el); // вывод отсортированного файла
+            //System.out.println(el); // вывод отсортированного файла
             writer.write(el + System.getProperty("line.separator"));
         }
         writer.close();
