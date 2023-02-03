@@ -44,11 +44,9 @@ public class Main {
         }
         String[] parameters = new String[args.length - counter];
 
-
         for (int i = counter; i < args.length - counter; i++) {
             stringParameters.add(args[i]);
         }
-
 
         boolean integersInAscending = (integers || (integers && ascending)) && !descending;
         boolean integersInDescending = integers && descending;
