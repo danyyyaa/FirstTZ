@@ -1,4 +1,5 @@
 import sort.IntegerSort;
+import sort.StringSort;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -62,20 +63,20 @@ public class Main {
         }
 
         if (integersInAscending) {
-            System.out.println("Числа по возрастанию");
             IntegerSort integerSort = new IntegerSort(parameters, outFileName, true);
             integerSort.run();
         }
         if (integersInDescending) {
-            System.out.println("Числа по убыванию");
             IntegerSort integerSort = new IntegerSort(parameters, outFileName, false);
             integerSort.run();
         }
         if (stringInAscending) {
-            System.out.println("Строки по возрастанию");
+            StringSort stringSort = new StringSort(parameters, outFileName, true);
+            stringSort.run();
         }
         if (stringInDescending) {
-            System.out.println("Строки по убыванию");
+            StringSort stringSort = new StringSort(parameters, outFileName, false);
+            stringSort.run();
         }
     }
 }

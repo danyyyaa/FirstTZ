@@ -42,27 +42,7 @@ public class IntegerSort {
             System.exit(0);
         }
     }
-    public IntegerSort() {
-        content = "";
-        this.content = getString("src/in1.txt", content);
-        this.content = getString("src/in2.txt", content);
-        this.content = getString("src/in3.txt", content);
 
-        String[] lines = content.split(("\\r?\\n"));
-
-        this.elements = new ArrayList<>();
-
-        for (int i = 0; i < lines.length; i++) {
-            try {
-                this.elements.add((Integer.parseInt(lines[i])));
-            } catch (NumberFormatException e) {} // проверка на строку в целочисленных файлах
-        }
-        arrayElements = new int[elements.size()];
-
-        for (int i = 0; i < arrayElements.length; i++) {
-            arrayElements[i] = elements.get(i);
-        }
-    }
     public void run() throws IOException {
         arrayElements = mergeSort(arrayElements);
         FileWriter writer = new FileWriter(fileName);
