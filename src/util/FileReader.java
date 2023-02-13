@@ -5,7 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileReader {
-    private static String readFileContents(String path) {
+    private static String readFileContents(String path) throws IOException {
         try {
             return Files.readString(Path.of(path));
         } catch (IOException e) {
@@ -13,9 +13,12 @@ public class FileReader {
             return null;
         }
     }
-    protected final static String getString(String path, String content) {
-        FileReader fileReader = new FileReader();
-        content += fileReader.readFileContents(path) + "\n";
+    protected static String getString(String path, String content) {
+        try {
+            content += readFileContents(path) + "\n";
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         return content;
     }
 }

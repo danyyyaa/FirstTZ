@@ -3,16 +3,15 @@ import sort.StringSort;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         String outFileName = null;
-        boolean ascending = false;
         boolean descending = false;
         boolean integers = false;
         boolean string = false;
-        boolean outFile = true;
         int counter = 0;
         List<String> stringParameters = new ArrayList<>();
 
@@ -25,16 +24,11 @@ public class Main {
                 if (args[i].equals("-i")) {
                     integers = true;
                 }
-                if (args[i].equals("-a")) {
-                    ascending = true;
-                }
                 if (args[i].equals("-d")) {
                     descending = true;
                 }
-
-                if (args[i].contains(".txt") && outFile) {
+                if (args[i].contains(".txt")) {
                     outFileName = args[i];
-                    outFile = false;
                     break;
                 }
             }
@@ -44,13 +38,11 @@ public class Main {
         }
         String[] parameters = new String[args.length - counter];
 
-        for (int i = counter; i < args.length - counter; i++) {
-            stringParameters.add(args[i]);
-        }
+        stringParameters.addAll(Arrays.asList(args).subList(counter, args.length - counter));
 
-        boolean integersInAscending = (integers || (integers && ascending)) && !descending;
+        boolean integersInAscending = integers && !descending;
         boolean integersInDescending = integers && descending;
-        boolean stringInAscending = ((string && ascending) || string) && !descending;
+        boolean stringInAscending = string && !descending;
         boolean stringInDescending = string && descending;
 
 
@@ -60,21 +52,25 @@ public class Main {
             newCounter++;
         }
 
-        if (integersInAscending) {
-            IntegerSort integerSort = new IntegerSort(parameters, outFileName, true);
-            integerSort.run();
-        }
-        if (integersInDescending) {
-            IntegerSort integerSort = new IntegerSort(parameters, outFileName, false);
-            integerSort.run();
-        }
-        if (stringInAscending) {
-            StringSort stringSort = new StringSort(parameters, outFileName, true);
-            stringSort.run();
-        }
-        if (stringInDescending) {
-            StringSort stringSort = new StringSort(parameters, outFileName, false);
-            stringSort.run();
+        try {
+            if (integersInAscending) {
+                IntegerSort integerSort = new IntegerSort(parameters, outFileName, true);
+                integerSort.run();
+            }
+            if (integersInDescending) {
+                IntegerSort integerSort = new IntegerSort(parameters, outFileName, false);
+                integerSort.run();
+            }
+            if (stringInAscending) {
+                StringSort stringSort = new StringSort(parameters, outFileName, true);
+                stringSort.run();
+            }
+            if (stringInDescending) {
+                StringSort stringSort = new StringSort(parameters, outFileName, false);
+                stringSort.run();
+            }
+        } catch (IOException e) {
+            System.out.println("Ошибка чтения файла");
         }
     }
 }

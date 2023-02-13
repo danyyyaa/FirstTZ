@@ -20,17 +20,18 @@ public class IntegerSort extends FileReader {
             this.sortStatus = sortStatus;
             this.fileName = fileName;
 
-            for (int i = 0; i < args.length; i++) {
-                this.content = FileReader.getString(args[i], content);
+            for (String arg : args) {
+                content = FileReader.getString(arg, content);
             }
             String[] lines = content.split(("\\r?\\n"));
 
             this.elements = new ArrayList<>();
 
-            for (int i = 0; i < lines.length; i++) {
+            for (String line : lines) {
                 try {
-                    this.elements.add((Integer.parseInt(lines[i])));
-                } catch (NumberFormatException e) {} // проверка на строку в целочисленных файлах
+                    this.elements.add((Integer.parseInt(line)));
+                } catch (NumberFormatException ignored) {
+                }
             }
 
             arrayElements = new int[elements.size()];
@@ -47,9 +48,6 @@ public class IntegerSort extends FileReader {
     public void run() throws IOException {
         arrayElements = mergeSort(arrayElements);
         FileWriter writer = new FileWriter(fileName);
-        /*for (int i : arrayElements) {
-            System.out.println(i);
-        }*/
 
         List<Integer> list = new ArrayList<>();
         if (!sortStatus) {
@@ -58,7 +56,6 @@ public class IntegerSort extends FileReader {
             }
             for (int el : list) {
                 writer.write(el + System.getProperty("line.separator"));
-               // System.out.println(el);
             }
         } else {
             for (int el : arrayElements) {
@@ -71,9 +68,8 @@ public class IntegerSort extends FileReader {
     private static int[] mergeSort(int[] sortArr) {
         int[] buffer1 = Arrays.copyOf(sortArr, sortArr.length);
         int[] buffer2 = new int[sortArr.length];
-        int[] result = mergeSortInner(buffer1, buffer2, 0, sortArr.length);
 
-        return result;
+        return mergeSortInner(buffer1, buffer2, 0, sortArr.length);
     }
 
     private static int[] mergeSortInner(int[] buffer1, int[] buffer2, int startIndex, int endIndex) {
@@ -81,12 +77,10 @@ public class IntegerSort extends FileReader {
             return buffer1;
         }
 
-        //уже отсортирован
         int middle = startIndex + (endIndex - startIndex) / 2;
         int[] sorted1 = mergeSortInner(buffer1, buffer2, startIndex, middle);
         int[] sorted2 = mergeSortInner(buffer1, buffer2, middle, endIndex);
 
-        //слияние
         int index1 = startIndex;
         int index2 = middle;
         int destIndex = startIndex;
