@@ -13,6 +13,7 @@ public class FileReader {
             return null;
         }
     }
+
     protected static String getString(String path, String content) {
         try {
             content += readFileContents(path) + "\n";

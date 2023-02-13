@@ -2,10 +2,6 @@ import sort.IntegerSort;
 import sort.StringSort;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public class Main {
     public static void main(String[] args) {
         String outFileName = null;
@@ -13,7 +9,6 @@ public class Main {
         boolean integers = false;
         boolean string = false;
         int counter = 0;
-        List<String> stringParameters = new ArrayList<>();
 
         try {
             for (int i = 0; i < 3; i++) {
@@ -36,9 +31,8 @@ public class Main {
             System.out.println("Ошибка. Передано недостаточно аргументов");
             System.exit(0);
         }
-        String[] parameters = new String[args.length - counter];
 
-        stringParameters.addAll(Arrays.asList(args).subList(counter, args.length - counter));
+        String[] parameters = new String[args.length - counter];
 
         boolean integersInAscending = integers && !descending;
         boolean integersInDescending = integers && descending;

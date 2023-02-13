@@ -15,7 +15,6 @@ public class StringSort extends FileReader {
     boolean sortStatus;
     List<String> elements = new ArrayList<>();
 
-
     public StringSort(String[] args, String fileName, boolean sortStatus) {
         this.args = args;
         this.fileName = fileName;
