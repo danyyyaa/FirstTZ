@@ -33,7 +33,7 @@ public class StringSort extends FileReader {
 
         FileWriter writer = new FileWriter(fileName);
         if (sortStatus) {
-            for (int i = elements.size() - 1; i > 0; i--) {
+            for (int i = elements.size() - 1; i > -1; i--) {
                 writer.write(elements.get(i).trim() + System.getProperty("line.separator"));
             }
         } else {

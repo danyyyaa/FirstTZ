@@ -51,7 +51,7 @@ public class IntegerSort extends FileReader {
 
         List<Integer> list = new ArrayList<>();
         if (!sortStatus) {
-            for (int i = arrayElements.length - 1; i > 0; i--) {
+            for (int i = arrayElements.length - 1; i > -1; i--) {
                 list.add(arrayElements[i]);
             }
             for (int el : list) {
